@@ -1,0 +1,43 @@
+/* PAGE STYLING */
+
+body {
+  align-items: center;
+  background-color: lightgreen;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 99vw;
+}
+
+div {
+    background-color: rgb(133, 153, 206);
+    animation-name: tree;
+    animation-duration: 10s;
+  }
+  
+.animation-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70%;
+}
+
+
+.animation {
+  height: 450px;
+  width: 450px;
+  display: flex;
+}
+
+/* ANIMATION STYLING: */
+img{
+    width: 100%;
+}
+@keyframes tree{
+    from {background-color: rgb(199, 112, 112);
+        width: 50%;
+    }
+    }
+    to {background-color: rgb(238, 238, 84);
+        width: 100%;}
