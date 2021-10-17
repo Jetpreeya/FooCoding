@@ -1,0 +1,112 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    }
+
+body{
+    background-color: rgb(241, 239, 198);
+}
+
+h1{
+font-family: Arial;
+font-size: 32px;
+color:orchid;
+}
+
+h2{
+    font-family:'Times New Roman';
+    font-size: 30px;
+    color: rgb(180, 168, 176);
+    border: 1px;
+    text-shadow: 2px 2px 5px rgb(237, 193, 243);
+}
+
+h3{
+    float:left ;
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: darkblue;
+    margin: 10px;
+}
+
+p{
+    margin:10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+img{
+float: none;
+width: 50%; 
+padding:0 6px;
+position:relative;
+border: 2px;
+}
+
+    #grid-floats{
+        float:left
+        }
+    #grid-floats .grid-item{
+        float: left;
+        padding: 10px;
+        height: 300px; ;
+        color: cornflowerblue;
+        overflow: hidden;
+        padding: 20px;
+        
+    }
+
+    #grid-flex .grid-item{
+        display: flex; 
+        align-self: auto;
+       flex-direction: column;
+       justify-content:space-evenly;
+       background-color:lightblue;
+       color:rgb(73, 68, 68);
+       
+    
+    }
+    #grid-flex{
+        display: flex; 
+        flex-wrap: wrap;
+        justify-content: right+space-between;
+        padding: auto;
+    }
+    
+
+
+/* For desktops: */
+@media only screen and (min-width: 992px) {
+    #grid-floats .grid-item, #grid-flex .grid-item{
+        width: 25%;
+    }
+    #grid-floats .grid-item:nth-child(1) {
+    width: 47%;
+  }
+  #grid-floats .grid-item:nth-child(2) {
+    width: 23%;
+  }
+}
+/* For tablets: */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #grid-floats .grid-item, #grid-flex .grid-item{
+        width: 33.33%;
+    }
+    #grid-floats .grid-item:nth-child(1) {
+        width: 48.5%;
+      }
+      #grid-floats .grid-item:nth-child(2) {
+        width: 48.5%;
+      }
+}
+
+/* For mobile: */
+@media only screen and (min-width: 375px) and (max-width: 812px) {
+    #grid-floats .grid-item, #grid-flex .grid-item{
+        width: 50%;
+    }
+    #grid-floats .grid-item:nth-child(1) {
+        width: 97.5%;
+      }
+}
