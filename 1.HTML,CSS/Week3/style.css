@@ -8,6 +8,7 @@
 body{
     margin-left: 80px;
 }
+
 #menu{
     display: flex;
     flex-wrap: wrap;
@@ -67,6 +68,7 @@ h2{
     margin-left: 750px;
     font-family:cursive;
 }
+
 .orange.a{
     text-decoration: none;
 }
@@ -86,8 +88,6 @@ h2{
     font-family: "Montserrat",sans-serif;;
 }
 
-
-
 #sop{
         display: flex;
         flex-direction: row;
@@ -98,26 +98,21 @@ h2{
         background-color: rgb(19, 18, 18);
         width: 86.7%;
         height: 100%;
-        text-align: center;
-    
-        
+        text-align: center;     
     }
+
 .one{
    margin-right: 20px;
-  
 }
 
-.two{
-    
-    padding-left: 155px;
-    
+.two{   
+    padding-left: 155px;   
 }
 
 h4{
    padding: 90px;
    margin-top: -40px;
-   padding-right: 200px;
-   
+   padding-right: 200px;   
 }
 
 .pop{
@@ -130,6 +125,7 @@ h4{
     width: 400px;
     height: 250px;
 }
+
 p{
     font-size: 20px;
     height: 300px;
@@ -154,9 +150,3 @@ p{
 .tre{
      padding-left: 119px;
 }
-
-
-
-
-
-
