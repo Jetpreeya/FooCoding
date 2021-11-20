@@ -15,7 +15,6 @@ body {
   margin-right: auto;
   }
 
-
   h1 {
     color: rgba(169, 169, 228, 0.753);
     border-width: 5px;
@@ -31,8 +30,6 @@ body {
     margin: 20px;
     font-family: Arial
   }
-
-
 
   box {
     border-style: solid;
@@ -58,8 +55,7 @@ body {
   .navbar a {
     padding: 12px;
     color: rgb(48, 29, 83);
-    font-size: 30px;
-    
+    font-size: 30px;    
   }
   
   .navbar a:hover {
