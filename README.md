@@ -1,4 +1,4 @@
-# FooCoding
+# FooCoding 👩💻
 FooCoding: is a course in software development run by the Foo Café Foundation in Malmö.<br>
 FooCoding: is a program intended to educate you as a fullstack web developer.
 There are the topic that I have learned.
