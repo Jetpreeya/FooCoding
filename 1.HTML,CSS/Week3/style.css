@@ -95,13 +95,16 @@ h2{
         background-color: rgb(19, 18, 18);
         width: 86.7%;
         height: 100%;
-        text-align: center; }
+        text-align: center; 
+}
 
 .one{
-   margin-right: 20px;}
+   margin-right: 20px;
+}
 
 .two{   
-    padding-left: 155px;}
+    padding-left: 155px;
+}
 
 h4{
    padding: 90px;
@@ -116,7 +119,8 @@ h4{
 
 .hop{
     width: 400px;
-    height: 250px;}
+    height: 250px;
+}
 
 p{
     font-size: 20px;
