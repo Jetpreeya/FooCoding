@@ -44,29 +44,27 @@ position:relative;
 border: 2px;
 }
 
-    #grid-floats{
+ #grid-floats{
         float:left
         }
-    #grid-floats .grid-item{
+  #grid-floats .grid-item{
         float: left;
         padding: 10px;
         height: 300px; ;
         color: cornflowerblue;
         overflow: hidden;
         padding: 20px;
-        
-    }
+     }
 
-    #grid-flex .grid-item{
+ #grid-flex .grid-item{
         display: flex; 
         align-self: auto;
        flex-direction: column;
        justify-content:space-evenly;
        background-color:lightblue;
        color:rgb(73, 68, 68);
-       
-    
     }
+
     #grid-flex{
         display: flex; 
         flex-wrap: wrap;
@@ -88,6 +86,7 @@ border: 2px;
     width: 23%;
   }
 }
+
 /* For tablets: */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     #grid-floats .grid-item, #grid-flex .grid-item{
