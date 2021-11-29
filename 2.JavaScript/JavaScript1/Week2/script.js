@@ -1,22 +1,22 @@
- //1
+//1
  console.log("Hej Hej");
   console.log("Sawadee");
    console.log("NiHao");
 
-  //2
+ //2
  console.log("I'm awesome");
 
- //3
+//3
  console.log('x=90');
     x = 32;
  console.log(x);
 
- //4
+//4
  console.log('Soon');
     y = 55;
  console.log(y);
  
- //5
+//5
  z=7.25;
  console.log(z);
 
@@ -27,17 +27,17 @@ if(a>z){
     console.log("true");
 }
 
- //6
+//6
 const animals=["Dog","Cat","Dolphin","Bird"];
 console.log(animals);
 
- //7
+//7
 let myString = "this is a test";
 myString.length = 5;
 console.log(myString);
 console.log(myString.length);
 
- //8
+//8
 let foo = 9;
 console.log("Home:"+foo);
 console.log(typeof 89);
@@ -57,7 +57,7 @@ if (m == n) {
   console.error(`No match: let m and let n are NOT same value.`);
 }
 
- //9
+//9
 
 x=7;
 if (x= x % 3){
