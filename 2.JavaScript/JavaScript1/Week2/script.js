@@ -3,7 +3,7 @@
   console.log("Sawadee");
    console.log("NiHao");
 
- //2
+//2
  console.log("I'm awesome");
 
 //3
@@ -90,4 +90,4 @@ if (e == f) {
    console.log(`Match! let e and let f are the same value.`);
  } else {
    console.error(`No match: let e and let f are NOT same value.`);
- }
+ };
