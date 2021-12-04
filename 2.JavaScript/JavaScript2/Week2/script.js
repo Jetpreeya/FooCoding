@@ -27,6 +27,7 @@ console.log(doubleOddNumbers);
 // console.log(evenNumbers);
 
 //1.2
+
 const monday = [
     {
       name: 'Write a summary HTML/CSS',
@@ -49,24 +50,20 @@ const monday = [
   const tuesday = [
     {
       name: 'Keep writing summary',
-      duration: 240,
-    },
+      duration: 240, },
     {
       name: 'Some more web development',
       duration: 180,
     },
     {
       name: 'Staring out the window',
-      duration: 10,
-    },
+      duration: 10, },
     {
       name: 'Talk to a lot of people',
-      duration: 200,
-    },
+      duration: 200, },
     {
       name: 'Look at application assignments new students',
-      duration: 40,
-    },
+      duration: 40, },
   ];
   
   const maartjesTasks = monday.concat(tuesday);
