@@ -5,7 +5,7 @@ There are the topic that I have learned.
 <ul>
 <li>HTML5/CSS3/CLI</li>
 <li>JavaScript/GIT/Debugging</li>
-<li>Node</li>
+<li>Node.JS, Express</li>
 <li>Database</li>
 <li>React</li>
 <li>Project</li>
