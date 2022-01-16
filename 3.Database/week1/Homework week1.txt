@@ -1,0 +1,24 @@
+//1.create a database HR//
+mysql> CREATE DATABASE db_HR;
+Query OK, 1 row affected (0.01 sec)
+
+//2.create a table employee//
+mysql> USE db_HR;
+Database changed
+mysql> CREATE TABLE employee (EmployeeID INT(8), DepartmentID CHAR(4), FirstName VARCHAR(20), LastName VARCHAR(20), Gender ENUM('m''f'), Email VARCHAR(30), Salary VARCHAR(8), StartWorkDate DATE);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> DESCRIBE employee;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| EmployeeID    | int(8)       | YES  |     | NULL    |       |
+| DepartmentID  | char(4)      | YES  |     | NULL    |       |
+| FirstName     | varchar(20)  | YES  |     | NULL    |       |
+| LastName      | varchar(20)  | YES  |     | NULL    |       |
+| Gender        | enum('m''f') | YES  |     | NULL    |       |
+| Email         | varchar(30)  | YES  |     | NULL    |       |
+| Salary        | varchar(8)   | YES  |     | NULL    |       |
+| StartWorkDate | date         | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.02 sec)
