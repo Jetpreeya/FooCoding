@@ -5,7 +5,10 @@ Query OK, 1 row affected (0.01 sec)
 //2.create a table employee//
 mysql> USE db_HR;
 Database changed
-mysql> CREATE TABLE employee (EmployeeID INT(8) PRIMARY KEY(EmployeeID) , DepartmentID CHAR(4), FirstName VARCHAR(20), LastName VARCHAR(20), Gender ENUM('M','F'), Email VARCHAR(30), Salary VARCHAR(8), StartWorkDate DATE);
+
+mysql> CREATE TABLE employee (EmployeeID INT(8) PRIMARY KEY(EmployeeID) , 
+DepartmentID CHAR(4), FirstName VARCHAR(20), LastName VARCHAR(20), Gender ENUM('M','F'), 
+Email VARCHAR(30), Salary VARCHAR(8), StartWorkDate DATE);
 Query OK, 0 rows affected (0.05 sec)
 
 mysql>  DESCRIBE employee;
@@ -26,7 +29,10 @@ mysql>  DESCRIBE employee;
 //3.create a table locations//
 mysql> USE db_HR;
 Database changed
-mysql> CREATE TABLE locations (LocationID INT(8)PRIMARY KEY(LocationID), Adress VARCHAR(20), Street VARCHAR(20), City VARCHAR(20), Country VARCHAR(20), PostalCode VARCHAR(7),EmployeeID INT(11) FOREIGN KEY(EmployeeID) REFERENCES employee(EmployeeID));
+
+mysql> CREATE TABLE locations (LocationID INT(8)PRIMARY KEY(LocationID), 
+Adress VARCHAR(20), Street VARCHAR(20), City VARCHAR(20), Country VARCHAR(20), 
+PostalCode VARCHAR(7),EmployeeID INT(11) FOREIGN KEY(EmployeeID) REFERENCES employee(EmployeeID));
 Query OK, 0 rows affected (0.05 sec)
 
 mysql> DESCRIBE locations;
@@ -604,7 +610,8 @@ mysql> SELECT * FROM locations;
 
 //5.List all the countries in the descending order of their surface areas.
 = SELECT Name FROM country ORDER BY SurfaceArea DESC;
-or SELECT Name,SurfaceArea FROM country ORDER BY SurfaceArea DESC; //(to see that surface areas is descending order)
+or SELECT Name,SurfaceArea FROM country ORDER BY SurfaceArea DESC; 
+   //(to see that surface areas is descending order)
 +----------------------------------------------+-------------+
 | Name                                         | SurfaceArea |
 +----------------------------------------------+-------------+
@@ -893,7 +900,8 @@ or SELECT Name,SurfaceArea FROM country ORDER BY SurfaceArea DESC; //(to see tha
 +-----------+------------+
 
 //8.What's the top 10 countries by Surface Area ?
-= SELECT Name,SurfaceArea FROM country ORDER BY SurfaceArea DESC LIMIT 10; //(top 10 largest Surface Area countries, I write DESC mean descending)
+= SELECT Name,SurfaceArea FROM country ORDER BY SurfaceArea DESC LIMIT 10; 
+  //(top 10 largest Surface Area countries, I write DESC mean descending)
 +--------------------+-------------+
 | Name               | SurfaceArea |
 +--------------------+-------------+
