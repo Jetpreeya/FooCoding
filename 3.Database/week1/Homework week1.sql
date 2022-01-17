@@ -7,24 +7,24 @@ mysql> USE db_HR;
 Database changed
 
 mysql> CREATE TABLE employee (EmployeeID INT(8) PRIMARY KEY(EmployeeID) , 
-DepartmentID CHAR(4), FirstName VARCHAR(20), LastName VARCHAR(20), Gender ENUM('M','F'), 
+DepartmentID CHAR(4), FirstName VARCHAR(20) NOT NULL, LastName VARCHAR(20) NOT NULL, Gender ENUM('M','F'), 
 Email VARCHAR(30), Salary VARCHAR(8), StartWorkDate DATE);
 Query OK, 0 rows affected (0.05 sec)
 
 mysql>  DESCRIBE employee;
+DESCRIBE employee;
 +---------------+---------------+------+-----+---------+-------+
 | Field         | Type          | Null | Key | Default | Extra |
 +---------------+---------------+------+-----+---------+-------+
 | EmployeeID    | int(8)        | NO   | PRI | NULL    |       |
 | DepartmentID  | char(4)       | YES  |     | NULL    |       |
-| FirstName     | varchar(20)   | YES  |     | NULL    |       |
-| LastName      | varchar(20)   | YES  |     | NULL    |       |
+| FirstName     | varchar(20)   | NO   |     | NULL    |       |
+| LastName      | varchar(20)   | NO   |     | NULL    |       |
 | Gender        | enum('M','F') | YES  |     | NULL    |       |
 | Email         | varchar(30)   | YES  |     | NULL    |       |
 | Salary        | varchar(8)    | YES  |     | NULL    |       |
 | StartWorkDate | date          | YES  |     | NULL    |       |
 +---------------+---------------+------+-----+---------+-------+
-8 rows in set (0.01 sec)
 
 //3.create a table locations//
 mysql> USE db_HR;
@@ -260,6 +260,7 @@ mysql> SELECT * FROM locations;
 
 //3.What are the names of the cities with population in between 500,000 and 1 million ?
 = SELECT Name FROM city WHERE population >=500000 and population < 1000000; 
+OR = SELECT Name , Population from city where Population BETWEEN 500000 AND 1000000;
 +--------------------------------+
 | Name                           |
 +--------------------------------+
@@ -870,38 +871,41 @@ or SELECT Name,SurfaceArea FROM country ORDER BY SurfaceArea DESC;
 
 //6.What are the names of all the cities in the Netherlands?
 = SELECT Name FROM city WHERE CountryCode = 'NLD';
-+------------------+
-| Name             |
-+------------------+
-| Amsterdam        |
-| Rotterdam        |
-| Haag             |
-| Utrecht          |
-| Eindhoven        |
-| Tilburg          |
-| Groningen        |
-| Breda            |
-| Apeldoorn        |
-| Nijmegen         |
-| Enschede         |
-| Haarlem          |
-| Almere           |
-| Arnhem           |
-| Zaanstad         |
-| ´s-Hertogenbosch |
-| Amersfoort       |
-| Maastricht       |
-| Dordrecht        |
-| Leiden           |
-| Haarlemmermeer   |
-| Zoetermeer       |
-| Emmen            |
-| Zwolle           |
-| Ede              |
-| Delft            |
-| Heerlen          |
-| Alkmaar          |
-+------------------+
+OR = SELECT city.Name, country.Name
+from country INNER JOIN city ON city.countryCode = country.Code
+where country.Name LIKE 'Netherlands';
++------------------+-------------+
+| Name             | Name        |
++------------------+-------------+
+| Amsterdam        | Netherlands |
+| Rotterdam        | Netherlands |
+| Haag             | Netherlands |
+| Utrecht          | Netherlands |
+| Eindhoven        | Netherlands |
+| Tilburg          | Netherlands |
+| Groningen        | Netherlands |
+| Breda            | Netherlands |
+| Apeldoorn        | Netherlands |
+| Nijmegen         | Netherlands |
+| Enschede         | Netherlands |
+| Haarlem          | Netherlands |
+| Almere           | Netherlands |
+| Arnhem           | Netherlands |
+| Zaanstad         | Netherlands |
+| ´s-Hertogenbosch | Netherlands |
+| Amersfoort       | Netherlands |
+| Maastricht       | Netherlands |
+| Dordrecht        | Netherlands |
+| Leiden           | Netherlands |
+| Haarlemmermeer   | Netherlands |
+| Zoetermeer       | Netherlands |
+| Emmen            | Netherlands |
+| Zwolle           | Netherlands |
+| Ede              | Netherlands |
+| Delft            | Netherlands |
+| Heerlen          | Netherlands |
+| Alkmaar          | Netherlands |
++------------------+-------------+
 
 //7.What is the population of Rotterdam ?
 = SELECT Name, Population FROM city WHERE Name = 'Rotterdam';
