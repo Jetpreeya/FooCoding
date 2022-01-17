@@ -6,7 +6,7 @@ There are the topic that I have learned.
 <li>HTML5/CSS3/CLI</li>
 <li>JavaScript/GIT/Debugging</li>
 <li>Node.JS, Express</li>
-<li>Database</li>
+<li>Database MySQL Cli</li>
 <li>React</li>
 <li>Project</li>
 <li>Speed dating</li>
