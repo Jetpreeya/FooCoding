@@ -49,6 +49,18 @@ mysql> DESCRIBE locations;
 +------------+-------------+------+-----+---------+-------+
 7 rows in set (0.01 sec)
 
+//Show all tables in database HR//
+
+mysql> USE db_HR;
+Database changed
+mysql> SHOW tables;
++-----------------+
+| Tables_in_db_hr |
++-----------------+
+| employee        |
+| locations       |
++-----------------+
+
 //4. Insert 10-20 rows in each table with relevant fields.//
 
 //4.1 Insert into employee table//
