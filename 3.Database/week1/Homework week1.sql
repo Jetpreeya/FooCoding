@@ -969,12 +969,3 @@ or SELECT Name,SurfaceArea FROM country ORDER BY SurfaceArea DESC;
 +-----------------+
 |      6078749450 |
 +-----------------+
-
-
-
-
-
-
-
-
-
