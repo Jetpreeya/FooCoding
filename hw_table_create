@@ -24,7 +24,7 @@ mysql> CREATE TABLE employee (
     Salary VARCHAR(8),
     StartWorkDate DATE,
     LocationID int(8) references locations(LocationID),
-    constraint unique loc_emp (LocationID, EmployeeID)
+    key loc_emp (LocationID, EmployeeID)
     );
 Query OK, 0 rows affected (0.03 sec)
 
