@@ -886,6 +886,7 @@ or SELECT Name,SurfaceArea FROM country ORDER BY SurfaceArea DESC;
 OR = SELECT city.Name, country.Name
 from country INNER JOIN city ON city.countryCode = country.Code
 where country.Name LIKE 'Netherlands';
+OR = SELECT city.Name FROM city INNER JOIN country ON city.countryCode = country.Code WHERE country.Name = 'Netherlands'; 
 +------------------+-------------+
 | Name             | Name        |
 +------------------+-------------+
