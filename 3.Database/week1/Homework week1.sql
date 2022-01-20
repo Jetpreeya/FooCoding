@@ -73,38 +73,37 @@ mysql> SHOW tables;
 //4. Insert 10-20 rows in each table with relevant fields.//
 
 //4.1 Insert into employee table//
-mysql> INSERT INTO employee(EmployeeID, DepartmentID, FirstName, LastName, Gender, Email, Salary, StartWorkDate) 
+mysql> INSERT INTO employee(EmployeeID, DepartmentID, FirstName, LastName, Gender, Email, Salary, StartWorkDate,LocationID ) 
 VALUES
-('11111', 'D1001', 'Emy', 'Amit', 'F', 'Emy.Amit@hotmail.com', '24,000', '2004-12-22'),
-('232356','F200','Michal','Hills','M','Michal.H@gmail.com','24,000','2005-02-25'),
-('224566','D100','Das','Nitin','M','Das.Nit@gmail.com','28,000','2007-07-24'),
-('345341','M300','Sharma', 'Sayak', 'F', 'Sharma.S@hotmail.com', '30,000','2005-03-14'),
-('394564','B200','Punia','Mani','F','Mani_P@gmail.com','28,000','2006-04-01'),
-('455675','R100','Luis','Vuitong','F','Luis_V@hotmail.com','24,000','2007-02-11'),
-('542193', 'F100','Wony','Elicson','M','Wony@gmail.com','26,000','2006-11-12');
-('564219','F100','Paul','Walker','M','P.Walker@google.com', '23,000','2008-12-07'),
-('642193', 'F100', 'Jana','Amand','F','Jana.Amand@gmail.com','25,000','2004-11-02'),
-('988678','E100', 'Lex', 'Demond','M','Lex.Demond@hotmail.com', '21,000', '2008-03-01'),
-('990678','S100', 'Gulf', 'Christy','M','Gulf.C@hotmail.com', '24,000','2010-03-01'), 
-('238678','H100', 'Banky', 'Penny','F','B.Penny@hotmail.com', '23,000', '2009-02-01');
+('11111', 'D100', 'Emy', 'Amit', 'F', 'Emy.Amit@hotmail.com', '24,000', '2004-12-22','1330' ),
+('232356','F200','Michal','Hills','M','Michal.H@gmail.com','24,000','2005-02-25','75'),
+('224566','D100','Das','Nitin','M','Das.Nit@gmail.com','28,000','2007-07-24','456'),
+('345341','M300','Sharma', 'Sayak', 'F', 'Sharma.S@hotmail.com', '30,000','2005-03-14','188'),
+('394564','B200','Punia','Mani','F','Mani_P@gmail.com','28,000','2006-04-01','451'),
+('455675','R100','Luis','Vuitong','F','Luis_V@hotmail.com','24,000','2007-02-11','544'),
+('542193', 'F100','Wony','Elicson','M','Wony@gmail.com','26,000','2006-11-12','139'),
+('564219','F100','Paul','Walker','M','P.Walker@google.com', '23,000','2008-12-07','9'),
+('642193', 'F100', 'Jana','Amand','F','Jana.Amand@gmail.com','25,000','2004-11-02','49'),
+('988678','E100', 'Lex', 'Demond','M','Lex.Demond@hotmail.com', '21,000', '2008-03-01','89'),
+('990678','S100', 'Gulf', 'Christy','M','Gulf.C@hotmail.com', '24,000','2010-03-01','89'), 
+('238678','H100', 'Banky', 'Penny','F','B.Penny@hotmail.com', '23,000', '2009-02-01','544');
 
-mysql> SELECT * FROM employee;
-+------------+--------------+-----------+----------+--------+------------------------+--------+---------------+
-| EmployeeID | DepartmentID | FirstName | LastName | Gender | Email                  | Salary | StartWorkDate |
-+------------+--------------+-----------+----------+--------+------------------------+--------+---------------+
-|      11111 | D100         | Emy       | Amit     | F      | Emy.Amit@hotmail.com   | 24,000 | 2004-12-22    |
-|     224566 | D100         | Das       | Nitin    | M      | Das.Nit@gmail.com      | 28,000 | 2007-07-24    |
-|     232356 | F200         | Michal    | Hills    | M      | Michal.H@gmail.com     | 24,000 | 2005-02-25    |
-|     238678 | H100         | Banky     | Penny    | F      | B.Penny@hotmail.com    | 23,000 | 2009-02-01    |
-|     345341 | M300         | Sharma    | Sayak    | F      | Sharma.S@hotmail.com   | 30,000 | 2005-03-14    |
-|     394564 | B200         | Punia     | Mani     | F      | Mani_P@gmail.com       | 28,000 | 2006-04-01    |
-|     455675 | R100         | Luis      | Vuitong  | F      | Luis_V@hotmail.com     | 24,000 | 2007-02-11    |
-|     542193 | F100         | Wony      | Elicson  | M      | Wony@gmail.com         | 26,000 | 2006-11-12    |
-|     564219 | F100         | Paul      | Walker   | M      | P.Walker@google.com    | 23,000 | 2008-12-07    |
-|     642193 | F100         | Jana      | Amand    | F      | Jana.Amand@gmail.com   | 25,000 | 2004-11-02    |
-|     988678 | E100         | Lex       | Demond   | M      | Lex.Demond@hotmail.com | 21,000 | 2008-03-01    |
-|     990678 | S100         | Gulf      | Christy  | M      | Gulf.C@hotmail.com     | 24,000 | 2010-03-01    |
-+------------+--------------+-----------+----------+--------+------------------------+--------+---------------+
++------------+--------------+-----------+----------+--------+------------------------+--------+---------------+------------+
+| EmployeeID | DepartmentID | FirstName | LastName | Gender | Email                  | Salary | StartWorkDate | LocationID |
++------------+--------------+-----------+----------+--------+------------------------+--------+---------------+------------+
+|      11111 | D100         | Emy       | Amit     | F      | Emy.Amit@hotmail.com   | 24,000 | 2004-12-22    |         75 |
+|     224566 | D100         | Das       | Nitin    | M      | Das.Nit@gmail.com      | 28,000 | 2007-07-24    |        188 |
+|     232356 | F200         | Michal    | Hills    | M      | Michal.H@gmail.com     | 24,000 | 2005-02-25    |        456 |
+|     238678 | H100         | Banky     | Penny    | F      | B.Penny@hotmail.com    | 23,000 | 2009-02-01    |          9 |
+|     345341 | M300         | Sharma    | Sayak    | F      | Sharma.S@hotmail.com   | 30,000 | 2005-03-14    |        139 |
+|     394564 | B200         | Punia     | Mani     | F      | Mani_P@gmail.com       | 28,000 | 2006-04-01    |        451 |
+|     455675 | R100         | Luis      | Vuitong  | F      | Luis_V@hotmail.com     | 24,000 | 2007-02-11    |        451 |
+|     542193 | F100         | Wony      | Elicson  | M      | Wony@gmail.com         | 26,000 | 2006-11-12    |        544 |
+|     564219 | F100         | Paul      | Walker   | M      | P.Walker@google.com    | 23,000 | 2008-12-07    |        544 |
+|     642193 | F100         | Jana      | Amand    | F      | Jana.Amand@gmail.com   | 25,000 | 2004-11-02    |         89 |
+|     988678 | E100         | Lex       | Demond   | M      | Lex.Demond@hotmail.com | 21,000 | 2008-03-01    |         89 |
+|     990678 | S100         | Gulf      | Christy  | M      | Gulf.C@hotmail.com     | 24,000 | 2010-03-01    |          9 |
++------------+--------------+-----------+----------+--------+------------------------+--------+---------------+------------+
 12 rows in set (0.00 sec)
 
 //4.2 Insert into locations table//
@@ -121,24 +120,22 @@ VALUES
 ('49','78 loi', 'Popnon Street', 'Paris', 'France','21000'),
 ('89','17 gak', 'Duke Street ', 'Lomma','Sweden','21165');
 
-mysql> SELECT * FROM locations ORDER BY LocationID ;
-+------------+---------+--------------------+----------+----------+------------+------------+
-| LocationID | Adress  | Street             | City     | Country  | PostalCode | EmployeeID |
-+------------+---------+--------------------+----------+----------+------------+------------+
-|          9 | 69 lof  | Wellington Street  | Rome     | Italy    | 12356      |     988678 |
-|         49 | 78 loi  | Popnon Street      | Paris    | France   | 21000      |     642193 |
-|         75 | 88 lol  | Main Street        | Lund     | Sweden   | 78895      |     224566 |
-|         75 | 88 lol  | Main Street        | Lund     | Sweden   | 78895      |     988678 |
-|         89 | 17 gak  | Duke Street        | Lomma    | Sweden   | 21165      |     455675 |
-|         89 | 17 gak  | Duke Street        | Lomma    | Sweden   | 21165      |     990678 |
-|        139 | 29 jup  | Morton Street      | Paris    | France   | 08900      |     564219 |
-|        188 | 39 Lghr | Abaco Street       | Bangkok  | Thailand | 21187      |     345341 |
-|        451 | 3 kok   | Catherine Street   | NewYork  | USA      | 90098      |     394564 |
-|        456 | 30 pap  | Jarvisville Street | Francis  | USA      | 56678      |     232356 |
-|        544 | 11 kol  | George Street      | Shanghai | China    | 45455      |     542193 |
-|       1330 | 15 lgh  | Southern Street    | London   | England  | 21568      |      11111 |
-+------------+---------+--------------------+----------+----------+------------+------------+
-12 rows in set (0.00 sec)
+SELECT * FROM locations;
++------------+---------+--------------------+----------+----------+------------+
+| LocationID | Adress  | Street             | City     | Country  | PostalCode |
++------------+---------+--------------------+----------+----------+------------+
+|          9 | 69 lof  | Wellington Street  | Rome     | Italy    | 12356      |
+|         49 | 78 loi  | Popnon Street      | Paris    | France   | 21000      |
+|         75 | 88 lol  | Main Street        | Lund     | Sweden   | 78895      |
+|         89 | 17 gak  | Duke Street        | Lomma    | Sweden   | 21165      |
+|        139 | 29 jup  | Morton Street      | Paris    | France   | 08900      |
+|        188 | 39 Lghr | Abaco Street       | Bangkok  | Thailand | 21187      |
+|        451 | 3 kok   | Catherine Street   | NewYork  | USA      | 90098      |
+|        456 | 30 pap  | Jarvisville Street | Francis  | USA      | 56678      |
+|        544 | 11 kol  | George Street      | Shanghai | China    | 45455      |
+|       1330 | 15 lgh  | Southern Street    | London   | England  | 21568      |
++------------+---------+--------------------+----------+----------+------------+
+10 rows in set (0.00 sec)
 
 //Two Employees can have the same adress//
 mysql> SELECT * FROM locations WHERE LocationID = '75';
