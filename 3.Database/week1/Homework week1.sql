@@ -5,45 +5,58 @@ mysql> CREATE DATABASE db_HR;
 mysql> USE db_HR;
 Database changed
 
-mysql> CREATE TABLE employee (EmployeeID INT(8) PRIMARY KEY(EmployeeID) , 
-DepartmentID CHAR(4), FirstName VARCHAR(20) NOT NULL, LastName VARCHAR(20) NOT NULL, Gender ENUM('M','F'), 
-Email VARCHAR(30), Salary VARCHAR(8), StartWorkDate DATE);
+mysql> CREATE TABLE employee (
+    EmployeeID INT(8) AUTO_INCREMENT PRIMARY KEY,
+    DepartmentID char(4),
+    FirstName VARCHAR(20) NOT NULL,
+    LastName VARCHAR(20) NOT NULL,
+    Gender ENUM('M','F'),
+    Email VARCHAR(30),
+    Salary VARCHAR(8),
+    StartWorkDate DATE,
+    LocationID int(8) references locations(LocationID),
+    key loc_emp (LocationID, EmployeeID)
+    );
 
-mysql>  DESCRIBE employee;
-+---------------+---------------+------+-----+---------+-------+
-| Field         | Type          | Null | Key | Default | Extra |
-+---------------+---------------+------+-----+---------+-------+
-| EmployeeID    | int(8)        | NO   | PRI | NULL    |       |
-| DepartmentID  | char(4)       | YES  |     | NULL    |       |
-| FirstName     | varchar(20)   | NO   |     | NULL    |       |
-| LastName      | varchar(20)   | NO   |     | NULL    |       |
-| Gender        | enum('M','F') | YES  |     | NULL    |       |
-| Email         | varchar(30)   | YES  |     | NULL    |       |
-| Salary        | varchar(8)    | YES  |     | NULL    |       |
-| StartWorkDate | date          | YES  |     | NULL    |       |
-+---------------+---------------+------+-----+---------+-------+
+DESCRIBE employee;
++---------------+---------------+------+-----+---------+----------------+
+| Field         | Type          | Null | Key | Default | Extra          |
++---------------+---------------+------+-----+---------+----------------+
+| EmployeeID    | int(8)        | NO   | PRI | NULL    | auto_increment |
+| DepartmentID  | char(4)       | YES  |     | NULL    |                |
+| FirstName     | varchar(20)   | NO   |     | NULL    |                |
+| LastName      | varchar(20)   | NO   |     | NULL    |                |
+| Gender        | enum('M','F') | YES  |     | NULL    |                |
+| Email         | varchar(30)   | YES  |     | NULL    |                |
+| Salary        | varchar(8)    | YES  |     | NULL    |                |
+| StartWorkDate | date          | YES  |     | NULL    |                |
+| LocationID    | int(8)        | YES  | MUL | NULL    |                |
++---------------+---------------+------+-----+---------+----------------+
 
 //3.create a table locations//
 mysql> USE db_HR;
 Database changed
 
-mysql> CREATE TABLE locations (LocationID INT(8)PRIMARY KEY(LocationID), 
-Adress VARCHAR(20), Street VARCHAR(20), City VARCHAR(20), Country VARCHAR(20), 
-PostalCode VARCHAR(7),EmployeeID INT(11) PRIMARY KEY(EmployeeID) REFERENCES employee(EmployeeID));
+mysql> CREATE TABLE locations (
+    LocationID INT(8) AUTO_INCREMENT PRIMARY KEY,
+    Adress VARCHAR(20),
+    Street VARCHAR(20),
+    City VARCHAR(20),
+    Country VARCHAR(20),
+    PostalCode VARCHAR(7)
+    );
 
 mysql> DESCRIBE locations;
-+------------+-------------+------+-----+---------+-------+
-| Field      | Type        | Null | Key | Default | Extra |
-+------------+-------------+------+-----+---------+-------+
-| LocationID | int(8)      | NO   | PRI | NULL    |       |
-| Adress     | varchar(20) | YES  |     | NULL    |       |
-| Street     | varchar(20) | YES  |     | NULL    |       |
-| City       | varchar(20) | YES  |     | NULL    |       |
-| Country    | varchar(20) | YES  |     | NULL    |       |
-| PostalCode | varchar(7)  | YES  |     | NULL    |       |
-| EmployeeID | int(11)     | NO   | PRI | NULL    |       |
-+------------+-------------+------+-----+---------+-------+
-7 rows in set (0.01 sec)
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| LocationID | int(8)      | NO   | PRI | NULL    | auto_increment |
+| Adress     | varchar(20) | YES  |     | NULL    |                |
+| Street     | varchar(20) | YES  |     | NULL    |                |
+| City       | varchar(20) | YES  |     | NULL    |                |
+| Country    | varchar(20) | YES  |     | NULL    |                |
+| PostalCode | varchar(7)  | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
 
 //Show all tables in database HR//
 
@@ -95,20 +108,18 @@ mysql> SELECT * FROM employee;
 12 rows in set (0.00 sec)
 
 //4.2 Insert into locations table//
-INSERT INTO locations(LocationID,Adress,Street,City,Country,PostalCode,EmployeeID) 
+INSERT INTO locations(LocationID,Adress,Street,City,Country,PostalCode) 
 VALUES
-('1330', '15 lgh', 'Southern Street', 'London', 'England','21568','11111'),
-('75','88 lol','Main Street','Lund','Sweden','78895','224566'),
-('456','30 pap','Jarvisville Street', 'Francis', 'USA','56678','232356'),
-('188','39 Lghr', 'Abaco Street', 'Bangkok','Thailand','21187','345341'),
-('451','3 kok', 'Catherine Street ','NewYork','USA','90098','394564'),
-('89','17 gak', 'Duke Street ', 'Lomma','Sweden','21165','455675'),
-('544','11 kol','George Street','Shanghai','China','45455', '542193'),
-('139','29 jup', 'Morton Street', 'Paris', 'France','08900','564219'),
-('9', '69 lof', 'Wellington Street', 'Rome', 'Italy','12356','988678'),
-('49','78 loi', 'Popnon Street', 'Paris', 'France','21000','642193'),
-('75','88 lol','Main Street','Lund','Sweden','78895','988678'),
-('89','17 gak', 'Duke Street ', 'Lomma','Sweden','21165',' 990678');
+('1330', '15 lgh', 'Southern Street', 'London', 'England','21568'),
+('75','88 lol','Main Street','Lund','Sweden','78895'),
+('456','30 pap','Jarvisville Street', 'Francis', 'USA','56678'),
+('188','39 Lghr', 'Abaco Street', 'Bangkok','Thailand','21187'),
+('451','3 kok', 'Catherine Street ','NewYork','USA','90098'),
+('544','11 kol','George Street','Shanghai','China','45455'),
+('139','29 jup', 'Morton Street', 'Paris', 'France','08900'),
+('9', '69 lof', 'Wellington Street', 'Rome', 'Italy','12356'),
+('49','78 loi', 'Popnon Street', 'Paris', 'France','21000'),
+('89','17 gak', 'Duke Street ', 'Lomma','Sweden','21165');
 
 mysql> SELECT * FROM locations ORDER BY LocationID ;
 +------------+---------+--------------------+----------+----------+------------+------------+
