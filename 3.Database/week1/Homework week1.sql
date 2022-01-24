@@ -279,8 +279,8 @@ mysql> SELECT * FROM locations WHERE LocationID = '75';
 +----------------------------------------------+
 
 //3.What are the names of the cities with population in between 500,000 and 1 million ?
-= SELECT Name FROM city WHERE population >=500000 and population < 1000000; 
-OR = SELECT Name , Population from city where Population BETWEEN 500000 AND 1000000;
+= SELECT Name , Population from city where Population BETWEEN 500000 AND 1000000;
+--should not write >= or < together --
 +--------------------------------+
 | Name                           |
 +--------------------------------+
