@@ -163,6 +163,7 @@ mysql> execute number using @a;
 +------------------+
 1 row in set (0.00 sec)
 
+
 --4.List all the continents with the number of languages spoken in each continent
 mysql> SELECT Continent, count(1) from country inner join countrylanguage on 
 countrylanguage.CountryCode = country.code group by Continent;
@@ -186,37 +187,60 @@ countrylanguage.CountryCode = country.code group by Continent;
 -- If yes, display those countries.
 -- If no, display TRUE or FALSE
 
-mysql> SELECT country.Code, country.Name, country.Region , countrylanguage.Language  
-    FROM country inner join countrylanguage
-    on country.Code = countrylanguage.CountryCode where country.Name = 'Norway';
-+------+--------+------------------+-----------+
-| Code | Name   | Region           | Language  |
-+------+--------+------------------+-----------+
-| NOR  | Norway | Nordic Countries | Danish    |
-| NOR  | Norway | Nordic Countries | English   |
-| NOR  | Norway | Nordic Countries | Norwegian |
-| NOR  | Norway | Nordic Countries | Saame     |
-| NOR  | Norway | Nordic Countries | Swedish   |
-+------+--------+------------------+-----------+
+mysql> prepare number from 'SELECT country.Code, country.Name, country.Region , countrylanguage.Language
+FROM country inner join countrylanguage on country.Code = countrylanguage.CountryCode where country.Name = ?';
+   
+mysql> set @a = 'Finland';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> set @b = 'Sweden';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute number using @a;
++------+---------+------------------+----------+
+| Code | Name    | Region           | Language |
++------+---------+------------------+----------+
+| FIN  | Finland | Nordic Countries | Estonian |
+| FIN  | Finland | Nordic Countries | Finnish  |
+| FIN  | Finland | Nordic Countries | Russian  |
+| FIN  | Finland | Nordic Countries | Saame    |
+| FIN  | Finland | Nordic Countries | Swedish  |
++------+---------+------------------+----------+
 5 rows in set (0.00 sec)
 
+mysql> execute number using @b;
++------+--------+------------------+---------------------------+
+| Code | Name   | Region           | Language                  |
++------+--------+------------------+---------------------------+
+| SWE  | Sweden | Nordic Countries | Arabic                    |
+| SWE  | Sweden | Nordic Countries | Finnish                   |
+| SWE  | Sweden | Nordic Countries | Norwegian                 |
+| SWE  | Sweden | Nordic Countries | Southern Slavic Languages |
+| SWE  | Sweden | Nordic Countries | Spanish                   |
+| SWE  | Sweden | Nordic Countries | Swedish                   |
++------+--------+------------------+---------------------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT IF(@a = @b, "TRUE", "FALSE");
++------------------------------+
+| IF(@a = @b, "TRUE", "FALSE") |
++------------------------------+
+| FALSE                        |
++------------------------------+
+1 row in set (0.00 sec) 
 
 
---'SELECT country.Code, country.Name, country.Region , countrylanguage.Language FROM country inner join countrylanguage 
-on country.Code = countrylanguage.CountryCode where language = 'English'';
+-- Check If --
+mysql> set @a = 'England';
+Query OK, 0 rows affected (0.00 sec)
 
-mysql> SELECT IF(STRCMP("English","English") = 0, "TRUE", "FALSE");
-+------------------------------------------------------+
-| IF(STRCMP("English","English") = 0, "TRUE", "FALSE") |
-+------------------------------------------------------+
-| TRUE                                                 |
-+------------------------------------------------------+
-1 row in set (0.01 sec)
+mysql> set @b = 'England';
+Query OK, 0 rows affected (0.00 sec)
 
-mysql> SELECT IF (STRCMP("?","?") = 0, "TRUE", "FALSE");
-+-------------------------------------------+
-| IF (STRCMP("?","?") = 0, "TRUE", "FALSE") |
-+-------------------------------------------+
-| TRUE                                      |
-+-------------------------------------------+
+mysql> SELECT IF(@a = @b, "TRUE", "FALSE");
++------------------------------+
+| IF(@a = @b, "TRUE", "FALSE") |
++------------------------------+
+| TRUE                         |
++------------------------------+
 1 row in set (0.00 sec)
