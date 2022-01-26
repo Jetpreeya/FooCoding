@@ -195,9 +195,9 @@ countrylanguage.CountryCode = country.code group by Continent;
 --is in the same region
 --If yes, display those countries.
 --If no, display TRUE or FALSE
+mysql> prepare number from 'SELECT country.Name, country.Region , countrylanguage.Language FROM country 
+inner join countrylanguage on country.Code = countrylanguage.CountryCode WHERE country.Name = ? GROUP BY Language';
 
-mysql> prepare number from 'SELECT country.Code, country.Name, country.Region , countrylanguage.Language
-FROM country inner join countrylanguage on country.Code = countrylanguage.CountryCode where country.Name = ?';
    
 mysql> set @a = 'Finland';
 Query OK, 0 rows affected (0.00 sec)
@@ -237,19 +237,3 @@ mysql> SELECT IF(@a = @b, "TRUE", "FALSE");
 | FALSE                        |
 +------------------------------+
 1 row in set (0.00 sec) 
-
-
--- Check If --
-mysql> set @a = 'England';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> set @b = 'England';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> SELECT IF(@a = @b, "TRUE", "FALSE");
-+------------------------------+
-| IF(@a = @b, "TRUE", "FALSE") |
-+------------------------------+
-| TRUE                         |
-+------------------------------+
-1 row in set (0.00 sec)
