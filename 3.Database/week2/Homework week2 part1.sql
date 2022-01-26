@@ -2,7 +2,7 @@
 
 --1.What is the capital of country X ? (Accept X from user)
 
-mysql> prepare capital from 'select ci.name from city ci inner join country co on ci.countrycode = co.code where co.name =? limit 1' ;
+mysql> prepare capital from 'select ci.name from city ci inner join country co on ci.countrycode = co.code where co.name =?' ;
 Query OK, 0 rows affected (0.00 sec)
 Statement prepared 
 
@@ -14,70 +14,55 @@ mysql> execute capital using @a;
 | name                   |
 +------------------------+
 | Helsinki [Helsingfors] |
+| Espoo                  |
+| Tampere                |
+| Vantaa                 |
+| Turku [Åbo]            |
+| Oulu                   |
+| Lahti                  |
 +------------------------+
-1 row in set (0.00 sec)
-
-mysql> set @b = 'Thailand';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> execute capital using @b;
-+---------+
-| name    |
-+---------+
-| Bangkok |
-+---------+
-1 row in set (0.00 sec)
-
-mysql> set @c = 'Sweden';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> execute capital using @c;
-+-----------+
-| name      |
-+-----------+
-| Stockholm |
-+-----------+
-1 row in set (0.00 sec)
-
+7 rows in set (0.00 sec)
 
 --2.List all the languages spoken in the region Y (Accept Y from user)
 
 --This is my logic
 --First think about SELECT & INNER JOIN
-mysql> SELECT countrylanguage.Language from countrylanguage inner join country on 
+mysql> SELECT countrylanguage.Language , country.Name, country.Region from countrylanguage inner join country on 
 countrylanguage.CountryCode = country.code where Region = 'Polynesia';
-+----------------+
-| Language       |
-+----------------+
-| English        |
-| Samoan         |
-| Tongan         |
-| English        |
-| Maori          |
-| English        |
-| Niue           |
-| Pitcairnese    |
-| Chinese        |
-| French         |
-| Tahitian       |
-| English        |
-| Tokelau        |
-| English        |
-| Tongan         |
-| English        |
-| Kiribati       |
-| Tuvalu         |
-| Futuna         |
-| Wallis         |
-| English        |
-| Samoan         |
-| Samoan-English |
-+----------------+
++----------------+-------------------+-----------+
+| Language       | Name              | Region    |
++----------------+-------------------+-----------+
+| English        | American Samoa    | Polynesia |
+| Samoan         | American Samoa    | Polynesia |
+| Tongan         | American Samoa    | Polynesia |
+| English        | Cook Islands      | Polynesia |
+| Maori          | Cook Islands      | Polynesia |
+| English        | Niue              | Polynesia |
+| Niue           | Niue              | Polynesia |
+| Pitcairnese    | Pitcairn          | Polynesia |
+| Chinese        | French Polynesia  | Polynesia |
+| French         | French Polynesia  | Polynesia |
+| Tahitian       | French Polynesia  | Polynesia |
+| English        | Tokelau           | Polynesia |
+| Tokelau        | Tokelau           | Polynesia |
+| English        | Tonga             | Polynesia |
+| Tongan         | Tonga             | Polynesia |
+| English        | Tuvalu            | Polynesia |
+| Kiribati       | Tuvalu            | Polynesia |
+| Tuvalu         | Tuvalu            | Polynesia |
+| Futuna         | Wallis and Futuna | Polynesia |
+| Wallis         | Wallis and Futuna | Polynesia |
+| English        | Samoa             | Polynesia |
+| Samoan         | Samoa             | Polynesia |
+| Samoan-English | Samoa             | Polynesia |
++----------------+-------------------+-----------+
 23 rows in set (0.00 sec)
 
 --Then, I put SELECT command after prepare
 --** This is my answer for Q2 
-mysql> prepare languages from 'SELECT countrylanguage.Language from countrylanguage inner join country 
+mysql> prepare languages from 'SELECT countrylanguage.Language, country.Name, country.Region 
+from countrylanguage 
+inner join country 
 on countrylanguage.CountryCode = country.code where Region = ?';
 Query OK, 0 rows affected (0.00 sec)
 Statement prepared
@@ -86,79 +71,72 @@ mysql> set @a = 'Southern Europe';
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> execute languages using @a;
-+----------------+
-| Language       |
-+----------------+
-| Albaniana      |
-| Greek          |
-| Macedonian     |
-| Catalan        |
-| French         |
-| Portuguese     |
-| Spanish        |
-| Serbo-Croatian |
-| Basque         |
-| Catalan        |
-| Galecian       |
-| Spanish        |
-| Arabic         |
-| English        |
-| Greek          |
-| Turkish        |
-| Serbo-Croatian |
-| Slovene        |
-| Albaniana      |
-| French         |
-| Friuli         |
-| German         |
-| Italian        |
-| Romani         |
-| Sardinian      |
-| Slovene        |
-| Albaniana      |
-| Macedonian     |
-| Romani         |
-| Serbo-Croatian |
-| Turkish        |
-| English        |
-| Maltese        |
-| Portuguese     |
-| Italian        |
-| Hungarian      |
-| Serbo-Croatian |
-| Slovene        |
-| Italian        |
-| Albaniana      |
-| Hungarian      |
-| Macedonian     |
-| Romani         |
-| Serbo-Croatian |
-| Slovak         |
-+----------------+
++----------------+-------------------------------+-----------------+
+| Language       | Name                          | Region          |
++----------------+-------------------------------+-----------------+
+| Albaniana      | Albania                       | Southern Europe |
+| Greek          | Albania                       | Southern Europe |
+| Macedonian     | Albania                       | Southern Europe |
+| Catalan        | Andorra                       | Southern Europe |
+| French         | Andorra                       | Southern Europe |
+| Portuguese     | Andorra                       | Southern Europe |
+| Spanish        | Andorra                       | Southern Europe |
+| Serbo-Croatian | Bosnia and Herzegovina        | Southern Europe |
+| Basque         | Spain                         | Southern Europe |
+| Catalan        | Spain                         | Southern Europe |
+| Galecian       | Spain                         | Southern Europe |
+| Spanish        | Spain                         | Southern Europe |
+| Arabic         | Gibraltar                     | Southern Europe |
+| English        | Gibraltar                     | Southern Europe |
+| Greek          | Greece                        | Southern Europe |
+| Turkish        | Greece                        | Southern Europe |
+| Serbo-Croatian | Croatia                       | Southern Europe |
+| Slovene        | Croatia                       | Southern Europe |
+| Albaniana      | Italy                         | Southern Europe |
+| French         | Italy                         | Southern Europe |
+| Friuli         | Italy                         | Southern Europe |
+| German         | Italy                         | Southern Europe |
+| Italian        | Italy                         | Southern Europe |
+| Romani         | Italy                         | Southern Europe |
+| Sardinian      | Italy                         | Southern Europe |
+| Slovene        | Italy                         | Southern Europe |
+| Albaniana      | Macedonia                     | Southern Europe |
+| Macedonian     | Macedonia                     | Southern Europe |
+| Romani         | Macedonia                     | Southern Europe |
+| Serbo-Croatian | Macedonia                     | Southern Europe |
+| Turkish        | Macedonia                     | Southern Europe |
+| English        | Malta                         | Southern Europe |
+| Maltese        | Malta                         | Southern Europe |
+| Portuguese     | Portugal                      | Southern Europe |
+| Italian        | San Marino                    | Southern Europe |
+| Hungarian      | Slovenia                      | Southern Europe |
+| Serbo-Croatian | Slovenia                      | Southern Europe |
+| Slovene        | Slovenia                      | Southern Europe |
+| Italian        | Holy See (Vatican City State) | Southern Europe |
+| Albaniana      | Yugoslavia                    | Southern Europe |
+| Hungarian      | Yugoslavia                    | Southern Europe |
+| Macedonian     | Yugoslavia                    | Southern Europe |
+| Romani         | Yugoslavia                    | Southern Europe |
+| Serbo-Croatian | Yugoslavia                    | Southern Europe |
+| Slovak         | Yugoslavia                    | Southern Europe |
++----------------+-------------------------------+-----------------+
 45 rows in set (0.00 sec)
 
-
 --3.Find the number of cities in which language Z is spoken (Accept Z from user)
---This is my logic
---First , use Inner join to find that Am I write correct command ? 
-mysql> SELECT city.name FROM city INNER JOIN country on city.countryCode = country.Code 
-INNER JOIN countrylanguage on countrylanguage.CountryCode = country.code 
-where Language = 'English';
+--This is my logic, I use COUNT to find number of all cities. 
 
---Then, I use COUNT to find number of all cities
-mysql> SELECT COUNT(city.name) FROM city INNER JOIN country on 
-city.countryCode = country.Code INNER JOIN countrylanguage on 
-countrylanguage.CountryCode = country.code where Language = 'English'; 
+mysql> SELECT COUNT(city.name) FROM city INNER JOIN countrylanguage on
+    -> countrylanguage.CountryCode = city.CountryCode where Language = 'English';
 +------------------+
 | COUNT(city.name) |
 +------------------+
 |              823 |
 +------------------+
+1 row in set (0.00 sec)
 
 --** Here is my answer, Finally I use prepare** 
-mysql> prepare number from 'SELECT COUNT(city.name) FROM city INNER JOIN country 
-on city.countryCode = country.Code INNER JOIN countrylanguage on 
-countrylanguage.CountryCode = country.code where Language = ?';
+mysql> prepare number from 'SELECT COUNT(city.name) FROM city INNER JOIN countrylanguage 
+on countrylanguage.CountryCode = city.CountryCode where Language= ?';
 Query OK, 0 rows affected (0.00 sec)
 Statement prepared
 
@@ -195,45 +173,39 @@ countrylanguage.CountryCode = country.code group by Continent;
 --is in the same region
 --If yes, display those countries.
 --If no, display TRUE or FALSE
-mysql> prepare number from 'SELECT country.Name, country.Region , countrylanguage.Language FROM country 
-inner join countrylanguage on country.Code = countrylanguage.CountryCode WHERE country.Name = ? GROUP BY Language';
 
-   
-mysql> set @a = 'Finland';
+mysql> prepare samelanguage from 'SELECT country.Code, country.Name, country.Region , countrylanguage.Language  
+FROM country inner join countrylanguage  on country.Code >= countrylanguage.CountryCode 
+AND countrylanguage.isOfficial=\'T\' inner join (SELECT country.Code, country.Name, country.Region , countrylanguage.Language  
+FROM country inner join countrylanguage  on country.Code = countrylanguage.CountryCode AND countrylanguage.isOfficial=\'T\' 
+WHERE country.Name=?) as countryalias on countryalias.Region = country.Region AND countryalias.Language = countrylanguage.Language';
+Query OK, 0 rows affected (0.00 sec)
+Statement prepared
+
+mysql> set @a = 'Sweden';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> set @b = 'Sweden';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> execute number using @a;
+mysql> execute samelanguage using @a;
 +------+---------+------------------+----------+
 | Code | Name    | Region           | Language |
 +------+---------+------------------+----------+
-| FIN  | Finland | Nordic Countries | Estonian |
-| FIN  | Finland | Nordic Countries | Finnish  |
-| FIN  | Finland | Nordic Countries | Russian  |
-| FIN  | Finland | Nordic Countries | Saame    |
 | FIN  | Finland | Nordic Countries | Swedish  |
+| SWE  | Sweden  | Nordic Countries | Swedish  |
 +------+---------+------------------+----------+
-5 rows in set (0.00 sec)
+2 rows in set (0.00 sec)
 
-mysql> execute number using @b;
-+------+--------+------------------+---------------------------+
-| Code | Name   | Region           | Language                  |
-+------+--------+------------------+---------------------------+
-| SWE  | Sweden | Nordic Countries | Arabic                    |
-| SWE  | Sweden | Nordic Countries | Finnish                   |
-| SWE  | Sweden | Nordic Countries | Norwegian                 |
-| SWE  | Sweden | Nordic Countries | Southern Slavic Languages |
-| SWE  | Sweden | Nordic Countries | Spanish                   |
-| SWE  | Sweden | Nordic Countries | Swedish                   |
-+------+--------+------------------+---------------------------+
+mysql> set @b = 'Singapore';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute samelanguage using @b;
++------+-----------+----------------+----------+
+| Code | Name      | Region         | Language |
++------+-----------+----------------+----------+
+| BRN  | Brunei    | Southeast Asia | Malay    |
+| IDN  | Indonesia | Southeast Asia | Malay    |
+| MYS  | Malaysia  | Southeast Asia | Malay    |
+| SGP  | Singapore | Southeast Asia | Chinese  |
+| SGP  | Singapore | Southeast Asia | Malay    |
+| SGP  | Singapore | Southeast Asia | Tamil    |
++------+-----------+----------------+----------+
 6 rows in set (0.00 sec)
-
-mysql> SELECT IF(@a = @b, "TRUE", "FALSE");
-+------------------------------+
-| IF(@a = @b, "TRUE", "FALSE") |
-+------------------------------+
-| FALSE                        |
-+------------------------------+
-1 row in set (0.00 sec) 
