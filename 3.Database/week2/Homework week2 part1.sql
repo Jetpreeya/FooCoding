@@ -2,32 +2,42 @@
 
 --1.What is the capital of country X ? (Accept X from user)
 
-mysql> prepare cities from 'select ci.name from city ci inner join country co on 
-ci.countrycode = co.code where lower(co.name) = ?';
+mysql> prepare capital from 'select ci.name from city ci inner join country co on ci.countrycode = co.code where co.name =? limit 1' ;
 Query OK, 0 rows affected (0.00 sec)
 Statement prepared 
 
-mysql> set @a = 'thailand';
+mysql> set @a = 'finland';
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> execute cities using @a;
-+-------------------+
-| name              |
-+-------------------+
-| Bangkok           |
-| Nonthaburi        |
-| Nakhon Ratchasima |
-| Chiang Mai        |
-| Udon Thani        |
-| Hat Yai           |
-| Khon Kaen         |
-| Pak Kret          |
-| Nakhon Sawan      |
-| Ubon Ratchathani  |
-| Songkhla          |
-| Nakhon Pathom     |
-+-------------------+
-12 rows in set (0.00 sec)
+mysql> execute capital using @a;
++------------------------+
+| name                   |
++------------------------+
+| Helsinki [Helsingfors] |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> set @b = 'Thailand';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute capital using @b;
++---------+
+| name    |
++---------+
+| Bangkok |
++---------+
+1 row in set (0.00 sec)
+
+mysql> set @c = 'Sweden';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> execute capital using @c;
++-----------+
+| name      |
++-----------+
+| Stockholm |
++-----------+
+1 row in set (0.00 sec)
 
 
 --2.List all the languages spoken in the region Y (Accept Y from user)
