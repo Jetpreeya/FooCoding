@@ -27,17 +27,19 @@ mysql> DESCRIBE user;
 mysql> CREATE TABLE IF NOT EXISTS list 
 (listID INT(5) AUTO_INCREMENT , 
 listName VARCHAR(20) , 
-itemID int(5) NOT NULL references item(itemID), key list_item (listID, itemID));
+itemID int(5) NOT NULL, 
+foreign key fk_item (itemID) references item (itemID), 
+key list_item (listID,itemID));
 Query OK, 0 rows affected (0.05 sec)
 
-mysql>  DESCRIBE list;
-+----------+-------------+------+-----+---------+----------------+
-| Field    | Type        | Null | Key | Default | Extra          |
-+----------+-------------+------+-----+---------+----------------+
-| listID   | int(5)      | NO   | MUL | NULL    | auto_increment |
-| listName | varchar(50) | YES  |     | NULL    |                |
-| itemID   | int(5)      | NO   |     | NULL    |                |
-+----------+-------------+------+-----+---------+----------------+
+mysql> DESCRIBE list;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| listID   | int(5)       | NO   | MUL | NULL    | auto_increment |
+| listName | varchar(255) | YES  |     | NULL    |                |
+| itemID   | int(5)       | NO   | MUL | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
 3 rows in set (0.00 sec)
 
 --Third item table
