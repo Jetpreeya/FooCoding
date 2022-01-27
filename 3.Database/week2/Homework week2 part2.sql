@@ -7,8 +7,7 @@ mysql> CREATE TABLE IF NOT EXISTS user (
     userID INT(5) AUTO_INCREMENT PRIMARY KEY,
     FirstName VARCHAR(20) NOT NULL,
     LastName VARCHAR(20) NOT NULL, 
-    Email VARCHAR(50) , 
-    ListID int(5) references list(listID), key list_user (listID, userID));
+    Email VARCHAR(50) );
 Query OK, 0 rows affected (0.06 sec)
 
 mysql> DESCRIBE user;
@@ -19,14 +18,15 @@ mysql> DESCRIBE user;
 | FirstName | varchar(20) | NO   |     | NULL    |                |
 | LastName  | varchar(20) | NO   |     | NULL    |                |
 | Email     | varchar(50) | YES  |     | NULL    |                |
-| ListID    | int(5)      | YES  | MUL | NULL    |                |
 +-----------+-------------+------+-----+---------+----------------+
-5 rows in set (0.00 sec)
+4 rows in set (0.00 sec)
 
 --Second list table 
 mysql> CREATE TABLE IF NOT EXISTS list 
 (listID INT(5) AUTO_INCREMENT , 
-listName VARCHAR(20) , 
+userID int(5) NOT NULL,
+foreign key fk_user (userID) references user (userID), 
+listName VARCHAR(255) , 
 itemID int(5) NOT NULL, 
 foreign key fk_item (itemID) references item (itemID), 
 key list_item (listID,itemID));
@@ -37,10 +37,12 @@ mysql> DESCRIBE list;
 | Field    | Type         | Null | Key | Default | Extra          |
 +----------+--------------+------+-----+---------+----------------+
 | listID   | int(5)       | NO   | MUL | NULL    | auto_increment |
+| userID   | int(5)       | NO   | MUL | NULL    |                |
 | listName | varchar(255) | YES  |     | NULL    |                |
 | itemID   | int(5)       | NO   | MUL | NULL    |                |
 +----------+--------------+------+-----+---------+----------------+
-3 rows in set (0.00 sec)
+4 rows in set (0.00 sec)
+
 
 --Third item table
  mysql> CREATE TABLE IF NOT EXISTS item (
@@ -90,38 +92,38 @@ mysql> SHOW tables;
 4 rows in set (0.00 sec)
 
 --Insert data into table
-mysql> Insert into user (userID, FirstName, LastName, Email , ListID ) 
+mysql> Insert into user (userID, FirstName, LastName, Email ) 
 VALUES 
-('23467', 'Susan', 'Kim', 'Susan@gmail.com','72346'),
-('55664', 'John', 'Alex', 'John.a@hotmail.com', '09876');
+('23467', 'Susan', 'Kim', 'Susan@gmail.com'),
+('55664', 'John', 'Alex', 'John.a@hotmail.com');
 
-mysql> SELECT userID, FirstName, LastName, Email , ListID FROM user;
-+--------+-----------+----------+--------------------+--------+
-| userID | FirstName | LastName | Email              | ListID |
-+--------+-----------+----------+--------------------+--------+
-|  23467 | Susan     | Kim      | Susan@gmail.com    |  72346 |
-|  55664 | John      | Alex     | John.a@hotmail.com |   9876 |
-+--------+-----------+----------+--------------------+--------+
+mysql> SELECT userID, FirstName, LastName, Email  FROM user;
++--------+-----------+----------+--------------------+
+| userID | FirstName | LastName | Email              |
++--------+-----------+----------+--------------------+
+|  23467 | Susan     | Kim      | Susan@gmail.com    |
+|  55664 | John      | Alex     | John.a@hotmail.com |
++--------+-----------+----------+--------------------+
 2 rows in set (0.00 sec)
 
 --Each list has at least one item.
 
-mysql> Insert into list ( listID , listName , itemID  ) 
+mysql> Insert into list ( listID , userID,  listName , itemID  ) 
 VALUES 
-('9876', 'Send Email to company', '43567'), 
-('9876', 'Send Email to client','07654'),
-('72346','Buy food', '56456'),
-('72346','Buy food', '12367');
+('9876', '23467','Send Email to company', '43567'), 
+('9876','23467', 'Send Email to client','07654'),
+('72346','55664 ','Buy food', '56456'),
+('72346','55664 ','Buy food', '12367');
 
-mysql> SELECT listID , listName , itemID FROM list;
-+--------+-----------------------+--------+
-| listID | listName              | itemID |
-+--------+-----------------------+--------+
-|  72346 | Buy food              |  56456 |
-|  72346 | Buy food              |  12367 |
-|   9876 | Send Email to company |  43567 |
-|   9876 | Send Email to client  |   7654 |
-+--------+-----------------------+--------+
+mysql> SELECT listID ,userID, listName , itemID FROM list;
++--------+--------+-----------------------+--------+
+| listID | userID | listName              | itemID |
++--------+--------+-----------------------+--------+
+|   9876 |  23467 | Send Email to company |  43567 |
+|   9876 |  23467 | Send Email to client  |   7654 |
+|  72346 |  55664 | Buy food              |  56456 |
+|  72346 |  55664 | Buy food              |  12367 |
++--------+--------+-----------------------+--------+
 4 rows in set (0.00 sec)
 
 --Each item can be tagged.
