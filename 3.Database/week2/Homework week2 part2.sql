@@ -47,7 +47,8 @@ mysql> DESCRIBE list;
 --Third item table
  mysql> CREATE TABLE IF NOT EXISTS item (
      itemID INT(5) AUTO_INCREMENT PRIMARY KEY, 
-     tagID INT(5) NOT NULL, 
+     tagID INT(5) NOT NULL,
+     foreign key fk_tag (tagID) references tag (tagID), 
      marked SET('Completed','NOT'), 
      date DATETIME);
 Query OK, 0 rows affected (0.05 sec)
@@ -66,18 +67,21 @@ mysql> DESCRIBE item;
 
 --Fourth tag table
 mysql> CREATE TABLE IF NOT EXISTS tag (
-    tagID INT(5) AUTO_INCREMENT PRIMARY KEY, 
+    tagID INT(5) AUTO_INCREMENT PRIMARY KEY,
+    itemID int(5) NOT NULL,
+    foreign key fk_item (itemID) references item (itemID), 
     description varchar(45) );
 Query OK, 0 rows affected (0.06 sec)
 
 mysql> DESCRIBE tag;
-+-------------+-------------+------+-----+---------+----------------+
++-------------+--------------+------+-----+---------+----------------+
 | Field       | Type         | Null | Key | Default | Extra          |
-+-------------+-------------+------+-----+---------+----------------+
++-------------+--------------+------+-----+---------+----------------+
 | tagID       | int(5)       | NO   | PRI | NULL    | auto_increment |
+| itemID      | int(5)       | NO   | MUL | NULL    |                |
 | description | varchar(255) | YES  |     | NULL    |                |
-+-------------+-------------+------+-----+---------+----------------+
-2 rows in set (0.00 sec)
++-------------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
 
 --I have 4 tables in my db_todo database 
 mysql> SHOW tables;
@@ -150,22 +154,22 @@ mysql> SELECT itemID, tagID, marked, date FROM item;
 4 rows in set (0.00 sec)
 
 -- Insert into tag table
-mysql> Insert into tag (tagID, description) 
+mysql> Insert into tag (tagID, itemID,  description) 
 VALUES 
-('1', 'Buy apple, milk and cheese before sunday'),
-('2', 'Buy agg, coffee, vine , pork before friday because my son birthday'), 
-('3','Send email to AB company'),
-('4', 'Send email information about the process ');
+('1','56456', 'Buy apple, milk and cheese before sunday'),
+('2','12367', 'Buy agg, coffee, vine , pork before friday because my son birthday'), 
+('3','43567', 'Send email to AB company'),
+('4','7654', 'Send email information about the process ');
 
 
-mysql> SELECT tagID, description FROM tag;
-+-------+--------------------------------------------------------------------+
-| tagID | description                                                        |
-+-------+--------------------------------------------------------------------+
-|     1 | Buy apple, milk and cheese before sunday                           |
-|     2 | Buy agg, coffee, vine , pork before friday because my son birthday |
-|     3 | Send email to AB company                                           |
-|     4 | Send email information about the process                           |
-+-------+--------------------------------------------------------------------+
+mysql> SELECT tagID, itemID,  description FROM tag;
++-------+--------+--------------------------------------------------------------------+
+| tagID | itemID | description                                                        |
++-------+--------+--------------------------------------------------------------------+
+|     1 |  56456 | Buy apple, milk and cheese before sunday                           |
+|     2 |  12367 | Buy agg, coffee, vine , pork before friday because my son birthday |
+|     3 |  43567 | Send email to AB company                                           |
+|     4 |   7654 | Send email information about the process                           |
++-------+--------+--------------------------------------------------------------------+
 4 rows in set (0.00 sec)
 
