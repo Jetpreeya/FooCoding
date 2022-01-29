@@ -6,13 +6,23 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
-var connection = mysql.createConnection({
+app.use(express.json());
+const db = mysql.createConnection({
     host     : 'localhost',
-    user     : 'me',
-    password : 'secret',
-    database : 'my_db'
-  });
-connection.connect();
+    user     : 'root',
+    password : 'Jetpreeya5616',
+    database : 'db_TODO'
+})
+
+app.get('/user', (req,res) => {
+    db.query("SELECT * FROM user", (err,result) => {
+        if(err) {
+            console.log(err);
+        } else{
+            res.send(result);
+        }
+    })
+});
 
 var i1  = [];
 app.get("/", function(req, res) {
