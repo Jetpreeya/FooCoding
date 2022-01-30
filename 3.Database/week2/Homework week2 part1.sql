@@ -13,6 +13,9 @@ mysql> select city.name from city inner join country on city.ID = country.capita
 mysql> prepare capital from 
 'select city.name from city inner join country on city.ID = country.capital where country.name =?';
 
+-- where lower(country.name) = lower(?) you can use lower for sensitive case
+
+
 mysql> set @a = 'finland';
 Query OK, 0 rows affected (0.00 sec)
 
@@ -164,7 +167,10 @@ mysql> execute number using @a;
 
 
 --4.List all the continents with the number of languages spoken in each continent
-mysql> SELECT Continent, count(1) from country inner join countrylanguage on 
+mysql> SELECT Continent, COUNT(countrylanguage.language) from country inner join countrylanguage on 
+countrylanguage.CountryCode = country.code group by Continent;
+--Same result COUNT(1) & COUNT(countrylanguage.language)
+mysql> SELECT Continent, COUNT(1) from country inner join countrylanguage on 
 countrylanguage.CountryCode = country.code group by Continent;
 +---------------+----------+
 | Continent     | count(1) |
@@ -178,6 +184,19 @@ countrylanguage.CountryCode = country.code group by Continent;
 +---------------+----------+
 6 rows in set (0.00 sec)
 
+mysql> SELECT Continent, COUNT(DISTINCT(countrylanguage.language)) from country inner join countrylanguage on
+    countrylanguage.CountryCode = country.code group by Continent;
++---------------+-------------------------------------------+
+| Continent     | COUNT(DISTINCT(countrylanguage.language)) |
++---------------+-------------------------------------------+
+| Asia          |                                       138 |
+| Europe        |                                        62 |
+| North America |                                        43 |
+| Africa        |                                       215 |
+| Oceania       |                                        43 |
+| South America |                                        21 |
++---------------+-------------------------------------------+
+6 rows in set (0.02 sec)
 
 --5.For the country given as input, is there any countries that 
 --have the same official language
