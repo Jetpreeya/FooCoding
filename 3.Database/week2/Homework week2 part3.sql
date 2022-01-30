@@ -27,3 +27,25 @@ end if;
 end;
 $$
 delimiter ;
+
+mysql> Insert into countrylanguage value ('SWE','chinese','F','3.5');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT COUNT(1) from countrylanguage where countrycode = 'SWE';
++----------+
+| COUNT(1) |
++----------+
+|        7 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> Insert into countrylanguage value ('SWE','French','F','10.9');
+ERROR 1644 (45000): You are trying to insert language 10 or above
+
+mysql> SELECT COUNT(1) from countrylanguage where countrycode = 'SWE';
++----------+
+| COUNT(1) |
++----------+
+|       10 |
++----------+
+1 row in set (0.00 sec)
