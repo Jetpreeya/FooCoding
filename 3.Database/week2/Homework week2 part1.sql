@@ -42,36 +42,63 @@ mysql> execute capital using @b;
 
 --This is my logic
 --First think about SELECT & INNER JOIN
-mysql> SELECT countrylanguage.Language , country.Name from countrylanguage inner join country on 
+mysql> SELECT DISTINCT(countrylanguage.Language) from countrylanguage inner join country on 
 countrylanguage.CountryCode = country.code where country.Region = 'Polynesia';
-+----------------+-------------------+
-| Language       | Name              |
-+----------------+-------------------+
-| English        | American Samoa    |
-| Samoan         | American Samoa    |
-| Tongan         | American Samoa    |
-| English        | Cook Islands      |
-| Maori          | Cook Islands      |
-| English        | Niue              |
-| Niue           | Niue              |
-| Pitcairnese    | Pitcairn          |
-| Chinese        | French Polynesia  |
-| French         | French Polynesia  |
-| Tahitian       | French Polynesia  |
-| English        | Tokelau           |
-| Tokelau        | Tokelau           |
-| English        | Tonga             |
-| Tongan         | Tonga             |
-| English        | Tuvalu            |
-| Kiribati       | Tuvalu            |
-| Tuvalu         | Tuvalu            |
-| Futuna         | Wallis and Futuna |
-| Wallis         | Wallis and Futuna |
-| English        | Samoa             |
-| Samoan         | Samoa             |
-| Samoan-English | Samoa             |
-+----------------+-------------------+
+
+mysql> SELECT DISTINCT(countrylanguage.Language) from countrylanguage inner join country on
+    countrylanguage.CountryCode = country.code where lower(country.Region) = lower('Polynesia');
++----------------+
+| Language       |
++----------------+
+| English        |
+| Samoan         |
+| Tongan         |
+| Maori          |
+| Niue           |
+| Pitcairnese    |
+| Chinese        |
+| French         |
+| Tahitian       |
+| Tokelau        |
+| Kiribati       |
+| Tuvalu         |
+| Futuna         |
+| Wallis         |
+| Samoan-English |
++----------------+
+15 rows in set (0.01 sec)
+
+--If you not write DISTINCT--
+mysql> SELECT countrylanguage.Language from countrylanguage inner join country on countrylanguage.CountryCode = country.code where country.Region = 'Polynesia';
++----------------+
+| Language       |
++----------------+
+| English        |
+| Samoan         |
+| Tongan         |
+| English        |
+| Maori          |
+| English        |
+| Niue           |
+| Pitcairnese    |
+| Chinese        |
+| French         |
+| Tahitian       |
+| English        |
+| Tokelau        |
+| English        |
+| Tongan         |
+| English        |
+| Kiribati       |
+| Tuvalu         |
+| Futuna         |
+| Wallis         |
+| English        |
+| Samoan         |
+| Samoan-English |
++----------------+
 23 rows in set (0.00 sec)
+
 --Then, I put SELECT command after prepare
 --** This is my answer for Q2 
 mysql> prepare languages from 'SELECT countrylanguage.Language, country.Name
@@ -141,6 +168,7 @@ mysql> execute languages using @a;
 
 mysql> SELECT COUNT(city.name) FROM city INNER JOIN countrylanguage on
     -> countrylanguage.CountryCode = city.CountryCode where Language = 'English';
+
 +------------------+
 | COUNT(city.name) |
 +------------------+
