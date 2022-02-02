@@ -7,15 +7,38 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.json());
+
+//connect with mysql
 const db = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'Jetpreeya5616',
+    password : 'root23',
     database : 'db_TODO'
 })
 
+//to get data from user mysql
 app.get('/user', (req,res) => {
     db.query("SELECT * FROM user", (err,result) => {
+        if(err) {
+            console.log(err);
+        } else{
+            res.send(result);
+        }
+    })
+});
+
+app.get('/list', (req,res) => {
+    db.query("SELECT * FROM list", (err,result) => {
+        if(err) {
+            console.log(err);
+        } else{
+            res.send(result);
+        }
+    })
+});
+
+app.get('/item', (req,res) => {
+    db.query("SELECT * FROM item", (err,result) => {
         if(err) {
             console.log(err);
         } else{
